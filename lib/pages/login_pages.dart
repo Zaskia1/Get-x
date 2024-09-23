@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_android/components/common/custom_input_field.dart';
 import 'package:flutter_android/components/common/page_header.dart';
-import 'package:flutter_android/components/forget_password_page.dart';
-import 'package:flutter_android/components/signup_page.dart';
+import 'package:flutter_android/pages/forget_password_page.dart';
+import 'package:flutter_android/pages/signup_page.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_android/components/common/page_heading.dart';
 import 'package:flutter_android/components/common/custom_form_button.dart';
@@ -20,7 +20,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xffEEF1F3),
@@ -54,9 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         CustomInputField(
                           labelText: 'Password',
                           hintText: 'Your password',
@@ -69,16 +69,13 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         Container(
                           width: size.width * 0.80,
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
-                            onTap: () => {
-                              // Menggunakan GetX untuk navigasi ke ForgetPasswordPage
-                              Get.to(() => const ForgetPasswordPage())
+                            onTap: () {
+                              Get.to(() => const ForgetPasswordPage());
                             },
                             child: const Text(
                               'Forget password?',
@@ -90,23 +87,19 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                         CustomFormButton(
                           innerText: 'Login',
                           onPressed: _handleLoginUser,
                         ),
-                        const SizedBox(
-                          height: 18,
-                        ),
+                        const SizedBox(height: 18),
                         SizedBox(
                           width: size.width * 0.8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                'Don\'t have an account ? ',
+                                'Don\'t have an account? ',
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Color(0xff939393),
@@ -114,9 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () => {
-                                  // Menggunakan GetX untuk navigasi ke SignupPage
-                                  Get.to(() => const SignupPage())
+                                onTap: () {
+                                  Get.to(() => const SignupPage());
                                 },
                                 child: const Text(
                                   'Sign-up',
@@ -130,9 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -146,14 +136,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleLoginUser() {
-    // login user
     if (_loginFormKey.currentState!.validate()) {
-      // Jika validasi berhasil, gunakan GetX untuk menampilkan snackbar
       Get.snackbar('Login Success', 'You have logged in successfully!',
           snackPosition: SnackPosition.BOTTOM);
-
-      // Pindah ke halaman utama setelah login sukses (contoh ke halaman HomeScreen)
-      Get.offNamed('/home');
+      print('Navigating to HomePage...');
+      Get.offNamed('/homepage');
+      print('Navigation triggered.');
     }
   }
 }
