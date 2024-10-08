@@ -171,7 +171,41 @@ class Home extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          buildRestoCard("Sushi Den", "assets/sushi1.png"),
+                          buildRestoCard("Sushi Den", 'assets/images/restoranSushi.jpg'),
+                          buildRestoCard("Hatsuhana Sushi", "assets/sushi2.png"),
+                          buildRestoCard("Prato Sushi", "assets/sushi3.png"),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "yufood",
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      "Pilihan Terlaris",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      height: 200,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          buildRestoCard("Sushi Den", "assets/images/sushi4.jpg"),
                           buildRestoCard("Hatsuhana Sushi", "assets/sushi2.png"),
                           buildRestoCard("Prato Sushi", "assets/sushi3.png"),
                         ],

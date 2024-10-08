@@ -3,6 +3,8 @@ import 'package:flutter_android/pages/login_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bindings/bindings.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => LoginPage()),
-        GetPage(name: '/homepage', page: () => HomePage()),
+        GetPage(name: '/homepage', page: () => HomePage(),
+    binding: MyBindings()),
       ],
     );
   }
