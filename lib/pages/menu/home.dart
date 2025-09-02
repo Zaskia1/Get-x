@@ -1,8 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_android/controller/controller_database.dart';
+import 'package:flutter_android/widgets/build_cart.dart';
+import 'package:get/get.dart';
+import 'package:flutter_android/widgets/promo_widget.dart';
+
+
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final FavoriteController favoriteController = Get.put(FavoriteController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +42,6 @@ class Home extends StatelessWidget {
                     ),
                     SizedBox(width: 10),
                     Icon(Icons.notifications),
-                    SizedBox(width: 10),
-                    Icon(Icons.account_circle),
                   ],
                 ),
               ),
@@ -62,14 +67,20 @@ class Home extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
+                              fontSize: 9.0, // Ukuran font diperkecil
                             ),
                           ),
                           SizedBox(height: 5),
                           ElevatedButton(
                             onPressed: () {},
-                            child: Text("Pakai Promonya Sekarang!"),
+                            child: Text(
+                              "Pakai Promonya Sekarang!",
+                              style: TextStyle(fontSize: 9.0), // Ukuran font pada tombol diperkecil
+                            ),
                             style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.green, backgroundColor: Colors.white,
+                              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 7), // Ukuran tombol diperkecil
+                              foregroundColor: Colors.green,
+                              backgroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -78,48 +89,13 @@ class Home extends StatelessWidget {
                         ],
                       ),
                       Image.asset(
-                        'assets/images/makan.png', // Sesuaikan dengan gambar yang kamu miliki
-                        height: 90,
+                        'assets/images/makan.png',
+                        height: 85,
                       ),
                     ],
                   ),
                 ),
               ),
-
-        Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Rp0",
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    Text("0 coins",
-                        style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                Row(
-                  children: [
-                    buildActionButton(Icons.payment, "Bayar"),
-                    SizedBox(width: 10),
-                    buildActionButton(Icons.account_balance_wallet, "Top Up"),
-                    SizedBox(width: 10),
-                    buildActionButton(Icons.more_horiz, "Lainnya"),
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-              // Grid Menu
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 child: GridView.count(
@@ -128,14 +104,14 @@ class Home extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   children: [
-                    buildMenuItem("GoRide", "assets/goride_icon.png"),
-                    buildMenuItem("GoCar", "assets/gocar_icon.png"),
-                    buildMenuItem("GoFood", "assets/gofood_icon.png"),
-                    buildMenuItem("GoSend", "assets/gosend_icon.png"),
-                    buildMenuItem("GoMart", "assets/gomart_icon.png"),
-                    buildMenuItem("GoTagihan", "assets/gotagihan_icon.png"),
-                    buildMenuItem("GoShop", "assets/goshop_icon.png"),
-                    buildMenuItem("Lainnya", "assets/lainnya_icon.png"),
+                    buildMenuItem("YuRide", 'assets/images/yuRide.jpg'),
+                    buildMenuItem("YuCar", 'assets/images/yuCar.jpg'),
+                    buildMenuItem("YuFood", 'assets/images/yuFood.jpg'),
+                    buildMenuItem("YuSend", 'assets/images/yuSend.jpg'),
+                    buildMenuItem("YuMart",'assets/images/yuMart.jpg'),
+                    buildMenuItem("YuTagihan", 'assets/images/yuTagihan.jpg'),
+                    buildMenuItem("YuShop", 'assets/images/yuShop.jpg'),
+                    buildMenuItem("Lainnya", 'assets/images/lainnya.jpg'),
                   ],
                 ),
               ),
@@ -152,7 +128,7 @@ class Home extends StatelessWidget {
                 ),
               ),
 
-              // Konten Bawah (Misalnya Rekomendasi Restoran)
+              // Konten Bawah (Daftar Restoran dengan Icon Love)
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -171,9 +147,10 @@ class Home extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          buildRestoCard("Sushi Den", 'assets/images/restoranSushi.jpg'),
-                          buildRestoCard("Hatsuhana Sushi", "assets/sushi2.png"),
-                          buildRestoCard("Prato Sushi", "assets/sushi3.png"),
+                          RestoCard(name: "Sushi Den", imgPath: 'assets/images/restoranSushi.jpg'),
+                          RestoCard(name: "Resto Hatsuhana", imgPath: 'assets/images/restoran1.jpg'),
+                          RestoCard(name: "Resto Prato", imgPath: 'assets/images/restoran2.jpg'),
+                          RestoCard(name: "Resto Gokil", imgPath: 'assets/images/restoran3.jpg'),
                         ],
                       ),
                     ),
@@ -205,12 +182,48 @@ class Home extends StatelessWidget {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          buildRestoCard("Sushi Den", "assets/images/sushi4.jpg"),
-                          buildRestoCard("Hatsuhana Sushi", "assets/sushi2.png"),
-                          buildRestoCard("Prato Sushi", "assets/sushi3.png"),
+                          RestoCard(name: "Mie Gacoan", imgPath: 'assets/images/mieGacoan.jpg'),
+                          RestoCard(name: "Nasgor Gokil", imgPath: 'assets/images/nasgor.jpg'),
+                          RestoCard(name: "Chicken Katsu", imgPath: 'assets/images/chicken.jpg'),
                         ],
                       ),
                     ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Promo",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    PromoWidget(
+                      title: "27",
+                      subtitle: "Voucher & paket",
+                      icon: Icons.local_offer,
+                    ),
+                    PromoWidget(
+                      title: "0",
+                      subtitle: "Langganan",
+                      icon: Icons.subscriptions,
+                    ),
+                    PromoWidget(
+                      title: "Masukkan kode promo",
+                      subtitle: "",
+                      icon: Icons.qr_code,
+                    ),
+                    PromoWidget(
+                      title: "Ajak teman, dapat voucher",
+                      subtitle: "",
+                      icon: Icons.people,
+                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -234,7 +247,7 @@ class Home extends StatelessWidget {
           child: Center(
             child: Image.asset(
               iconPath,
-              height: 30,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -246,55 +259,26 @@ class Home extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget buildRestoCard(String name, String imgPath) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: Container(
-        width: 150,
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(10),
+  Widget buildActionButton(IconData icon, String label) {
+    return Column(
+      children: [
+        Container(
+          height: 50, // Ukuran untuk ikon tombol
+          width: 50,
+          decoration: BoxDecoration(
+            color: Colors.grey[200], // Warna background lingkaran tombol
+            shape: BoxShape.circle, // Bentuk tombol bulat
+          ),
+          child: Icon(icon, color: Colors.blue), // Ikon di tengah tombol
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              imgPath,
-              height: 120,
-              width: 150,
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                name,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+        SizedBox(height: 5), // Spasi antara ikon dan label
+        Text(
+          label,
+          style: TextStyle(fontSize: 12, color: Colors.black), // Teks di bawah ikon
         ),
-      ),
+      ],
     );
   }
-}
-Widget buildActionButton(IconData icon, String label) {
-  return Column(
-    children: [
-      Container(
-        height: 50, // Ukuran untuk ikon tombol
-        width: 50,
-        decoration: BoxDecoration(
-          color: Colors.grey[200], // Warna background lingkaran tombol
-          shape: BoxShape.circle, // Bentuk tombol bulat
-        ),
-        child: Icon(icon, color: Colors.blue), // Ikon di tengah tombol
-      ),
-      SizedBox(height: 5), // Spasi antara ikon dan label
-      Text(
-        label,
-        style: TextStyle(fontSize: 12, color: Colors.black), // Teks di bawah ikon
-      ),
-    ],
-  );
-}
+

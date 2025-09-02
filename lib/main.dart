@@ -2,11 +2,10 @@ import 'package:flutter_android/pages/home_page.dart';
 import 'package:flutter_android/pages/login_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'bindings/bindings.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

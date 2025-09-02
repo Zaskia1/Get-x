@@ -36,6 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   get: ^4.6.5
+  sqflite: ^2.4.0
+  shared_preferences: ^2.0.6
+  sqflite_common_ffi: ^2.0.0
   font_awesome_flutter: ^10.1.0
   email_validator: ^2.0.1
   image_picker: ^0.8.5+3
@@ -59,13 +62,27 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/images/gacoan.jpg
+    - assets/images/gopay.jpg
     - assets/images/maem.png
     - assets/images/makan.png
     - assets/images/restoranSushi.jpg
     - assets/images/restoran.jpg
-    - assets/images/gacoan.jpg
-    - assets/images/gopay.jpg
-
+    - assets/images/mieGacoan.jpg
+    - assets/images/yuRide.jpg
+    - assets/images/yuCar.jpg
+    - assets/images/yuFood.jpg
+    - assets/images/yuSend.jpg
+    -  assets/images/yuMart.jpg
+    - assets/images/yuTagihan.jpg
+    - assets/images/yuShop.jpg
+    - assets/images/lainnya.jpg
+    - assets/images/restoran1.jpg
+    - assets/images/restoran2.jpg
+    - assets/images/restoran3.jpg
+    - assets/images/nasgor.jpg
+    - assets/images/chicken.jpg
+    - assets/images/kucing.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

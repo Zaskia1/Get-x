@@ -4,15 +4,17 @@ import 'package:flutter_android/widgets/aktifitas_item.dart'; // Import Aktivita
 class Aktivitas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return DefaultTabController(
-      length: 4, // Jumlah tab
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text('Aktivitas'),
           bottom: TabBar(
-            indicatorColor: Colors.green, // Warna indikator aktif
-            labelColor: Colors.black, // Warna teks tab yang aktif
-            unselectedLabelColor: Colors.grey, // Warna teks tab yang tidak aktif
+            indicatorColor: Colors.green,
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(text: "Riwayat"),
               Tab(text: "Dalam Proses"),
@@ -23,10 +25,10 @@ class Aktivitas extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            RiwayatTab(), // Konten untuk tab Riwayat
-            Center(child: Text('Dalam Proses')), // Konten untuk tab Dalam Proses
-            Center(child: Text('Terjadwal')), // Konten untuk tab Terjadwal
-            Center(child: Text('Draf')), // Konten untuk tab Draf
+            RiwayatTab(screenWidth: screenWidth),
+            Center(child: Text('Dalam Proses')),
+            Center(child: Text('Terjadwal')),
+            Center(child: Text('Draf')),
           ],
         ),
       ),
@@ -35,27 +37,32 @@ class Aktivitas extends StatelessWidget {
 }
 
 class RiwayatTab extends StatelessWidget {
+  final double screenWidth;
+
+  RiwayatTab({required this.screenWidth});
+
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(screenWidth * 0.04),
       children: [
         AktivitasItem(
           title: "Mie Gacoan, Kudus",
           subtitle: "Makanan udah sampai",
           price: "Rp100.500",
           imagePath: 'assets/images/gacoan.jpg',
-          status: "Makanan udah sampai", // Status hijau
+          status: "Makanan udah sampai",
         ),
+        SizedBox(height: screenWidth * 0.05),
         AktivitasItem(
           title: "Transaksi GoPay",
           subtitle: "Pembayaran berhasil",
           price: "Rp50.000",
-          imagePath:
-          'assets/images/gopay.jpg', // Ganti dengan gambar asli
-          status: "Pembayaran berhasil", // Status hijau
+          imagePath: 'assets/images/gopay.jpg',
+          status: "Pembayaran berhasil",
         ),
       ],
     );
   }
 }
+

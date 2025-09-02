@@ -1,11 +1,12 @@
 import 'package:flutter_android/controller/bottom_nav_ctr.dart';
 import 'package:flutter_android/pages/menu/aktifitas.dart';
-import 'package:flutter_android/pages/menu/history.dart';
+import 'package:flutter_android/pages/menu/favorit.dart';
 import 'package:flutter_android/pages/menu/home.dart';
 import 'package:flutter_android/pages/menu/chat.dart';
 import 'package:flutter_android/pages/menu/promo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_android/pages/menu/settings.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
     final BottomNavCtr bottomNavCtr = Get.put(BottomNavCtr());
 
     // Tambahkan halaman baru ke dalam menus
-    final List<Widget> menus = [Home(), PromoPage(), Aktivitas(), Chat()];
+    final List<Widget> menus = [Home(), Chat(), Aktivitas(), Favorit(), SettingsPage()];
 
     return Obx(() {
       return Scaffold(
@@ -40,16 +41,20 @@ class HomePage extends StatelessWidget {
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer),
-              label: "Promo",
+              icon: Icon(Icons.chat),
+              label: "Chat",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
               label: "History",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Chat",
+              icon: Icon(Icons.favorite ),
+              label: "Favorit",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: "Setting",
             ),
           ],
         ),

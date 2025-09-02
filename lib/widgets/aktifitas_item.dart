@@ -17,35 +17,63 @@ class AktivitasItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Mendapatkan lebar layar untuk responsivitas
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        leading: Image.network(imagePath, width: 50, height: 50),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Column(
+      margin: EdgeInsets.symmetric(vertical: screenWidth * 0.02),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(subtitle),
-            SizedBox(height: 4.0),
-            Row(
-              children: [
-                Icon(Icons.check_circle, color: Colors.green, size: 16.0),
-                SizedBox(width: 4.0),
-                Text(status, style: TextStyle(color: Colors.green)),
-              ],
-            ),
-          ],
-        ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(price, style: TextStyle(fontWeight: FontWeight.bold)),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Warna tombol hijau
+            // Gambar dengan ukuran tetap dan responsive
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                imagePath,
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
               ),
-              child: Text('Mau lagi'),
+            ),
+            SizedBox(width: screenWidth * 0.04), // Jarak antara gambar dan teks
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(height: screenWidth * 0.01),
+                  Text(subtitle, style: TextStyle(fontSize: 12.0)), // Mengatur subtitle agar lebih kecil
+                  SizedBox(height: screenWidth * 0.01),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle, color: Colors.green, size: 12.0),
+                      SizedBox(width: screenWidth * 0.01),
+                      Text(
+                        status,
+                        style: TextStyle(color: Colors.green, fontSize: 12.0), // Mengatur status agar lebih kecil
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(price, style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 3),
+                FittedBox(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                    child: Text('Mau lagi'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
